@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patología Oncológica - UAN</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap');
+        
+        :root {
+            --primary: #4a148c;
+            --secondary: #00acc1;
+            --dark: #1a237e;
+            --light: #e8eaf6;
+            --accent: #ff4081;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f1a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--dark), #000);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .logo-uan {
+            height: 80px;
+            margin-right: 20px;
+        }
+        
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: rgba(26, 35, 126, 0.8);
+            padding: 1rem;
+            transition: all 0.3s;
+            border-right: 1px solid var(--accent);
+        }
+        
+        .sidebar-collapsed {
+            margin-left: -250px;
+        }
+        
+        .sidebar-toggle {
+            position: fixed;
+            left: 10px;
+            top: 100px;
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(255, 64, 129, 0.7);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background-color: rgba(15, 15, 26, 0.9);
+        }
+        
+        .menu-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: rgba(74, 20, 140, 0.5);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 300;
+        }
+        
+        .menu-item:hover {
+            background-color: var(--accent);
+            transform: translateX(10px);
+            box-shadow: 0 0 15px rgba(255, 64, 129, 0.5);
+        }
+        
+        .histo-image {
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 172, 193, 0.3);
+        }
+        
+        .ai-section {
+            background: rgba(26, 35, 126, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .ai-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-link {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .ai-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--secondary);
+        }
+        
+        .motivation-box {
+            background: rgba(255, 64, 129, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border: 1px dashed var(--accent);
+            font-style: italic;
+        }
+        
+        .glowing-text {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--secondary), 0 0 20px var(--secondary);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--secondary), 0 0 40px var(--secondary);
+            }
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #000, var(--dark));
+            padding: 1rem;
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .content-section {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="c:\Users\Jorge Monrroy\Desktop\JORGELMD\A-Desktop-JLMD\AA.JORGELMD\PATO-5-uan-MED-1\0-LOGO-UAN\Logo UAN.PNG" alt="Universidad Antonio Nariño" class="logo-uan">
+        <h1 class="glowing-text">PATOLOGÍA ONCOLÓGICA ~ DR JORGE-MONROY</h1>
+    </header>
+    
+    <div class="main-container">
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        
+        <nav class="sidebar" id="sidebar">
+            <div class="menu-item" onclick="showSection('introduccion')">Introducción</div>
+            <div class="menu-item" onclick="showSection('conceptos')">Conceptos Básicos</div>
+            <div class="menu-item" onclick="showSection('lesion')">Lesión Celular</div>
+            <div class="menu-item" onclick="showSection('cambios')">Cambios Estructurales y Funcionales</div>
+            <div class="menu-item" onclick="showSection('muerte')">Procesos de Muerte Celular</div>
+            <div class="menu-item" onclick="showSection('senalizacion')">Señalización y Respuestas Adaptativas</div>
+            <div class="menu-item" onclick="showSection('ia-tools')">Herramientas de IA</div>
+        </nav>
+        
+        <main class="content" id="mainContent">
+            <!-- Sección de Introducción -->
+            <section id="introduccion" class="content-section">
+                <h2>Introducción a la Patología Oncológica</h2>
+                <p>La patología oncológica es una rama especializada de la medicina que estudia los cambios morfológicos, bioquímicos y moleculares que ocurren en las células y tejidos durante el proceso de carcinogénesis. Esta disciplina integra conocimientos de biología celular, genética molecular y anatomía patológica para comprender la naturaleza del cáncer.</p>
+                
+                <p>El cáncer representa un conjunto de enfermedades caracterizadas por el crecimiento descontrolado de células con capacidad para invadir tejidos adyacentes y diseminarse a otros órganos (metástasis). La patología oncológica busca identificar las alteraciones que diferencian a las células neoplásicas de las células normales, lo que permite no solo el diagnóstico preciso sino también el desarrollo de terapias dirigidas.</p>
+                
+                <div class="motivation-box">
+                    <h3>Motivación</h3>
+                    <p>"En el corazón de cada célula cancerosa se esconde un misterio por resolver. Cada imagen histológica que analizamos, cada marcador molecular que identificamos, nos acerca a descifrar estos enigmas y transformar el panorama del tratamiento oncológico. Tu curiosidad científica hoy puede convertirse en la esperanza de un paciente mañana."</p>
+                </div>
+                
+                <img src="c:\Users\Jorge Monrroy\Desktop\JORGELMD\A-Desktop-JLMD\AA.JORGELMD\PATO-5-uan-MED-1\0-gl-MAMARIA\Diapositiva2.PNG" alt="Imagen histológica de carcinoma ductal invasivo de mama" class="histo-image">
+                <p><em>Carcinoma ductal invasivo de mama. Notar la desorganización arquitectural, pleomorfismo nuclear y figuras mitóticas atípicas.</em></p>
+            </section>
+            
+            <!-- Sección de Conceptos Básicos -->
+            <section id="conceptos" class="content-section hidden">
+                <h2>Conceptos Básicos en Oncología</h2>
+                <h3>Neoplasia</h3>
+                <p>Masa anormal de tejido cuyo crecimiento excede y está descoordinado con el de los tejidos normales, persistiendo después de cesar el estímulo que lo provocó. Las neoplasias pueden ser:</p>
+                <ul>
+                    <li><strong>Benignas:</strong> Crecimiento localizado, bien delimitado, sin capacidad de invasión o metástasis</li>
+                    <li><strong>Malignas (cáncer):</strong> Crecimiento infiltrativo, con capacidad de invasión local y metástasis a distancia</li>
+                </ul>
+                
+                <h3>Características de las células malignas</h3>
+                <ul>
+                    <li>Autosuficiencia en señales de crecimiento</li>
+                    <li>Insensibilidad a señales anti-proliferativas</li>
+                    <li>Evasión de la apoptosis</li>
+                    <li>Potencial replicativo ilimitado</li>
+                    <li>Angiogénesis sostenida</li>
+                    <li>Invasividad tisular y metástasis</li>
+                    <li>Inestabilidad genómica</li>
+                    <li>Reprogramación del metabolismo energético</li>
+                </ul>
+                
+                <img src="c:\Users\Jorge Monrroy\Desktop\JORGELMD\A-Desktop-JLMD\AA.JORGELMD\PATO-5-uan-MED-1\7-CARCINOGENESISyNEOPLASIAS-2 - fotos\Diapositiva7-1.PNG" alt="Imagen histológica de adenocarcinoma de colon" class="histo-image">
+                <p><em>Adenocarcinoma de colon. Observar glándulas neoplásicas irregulares con estratificación nuclear y pérdida de la polaridad.</em></p>
+            </section>
+            
+            <!-- Sección de Lesión Celular -->
+            <section id="lesion" class="content-section hidden">
+                <h2>Lesión Celular en el Cáncer</h2>
+                <p>La transformación maligna resulta de la acumulación progresiva de alteraciones genéticas y epigenéticas que confieren a las células propiedades neoplásicas. Estas lesiones pueden ser:</p>
+                
+                <h3>Alteraciones genéticas</h3>
+                <ul>
+                    <li><strong>Mutaciones puntuales:</strong> Cambios en nucleótidos individuales (ej. mutaciones en KRAS, TP53)</li>
+                    <li><strong>Amplificaciones génicas:</strong> Aumento en el número de copias de oncogenes (ej. HER2/neu)</li>
+                    <li><strong>Deleciones:</strong> Pérdida de genes supresores de tumores (ej. p16, PTEN)</li>
+                    <li><strong>Translocaciones:</strong> Reordenamientos cromosómicos (ej. BCR-ABL en LMC)</li>
+                </ul>
+                
+                <h3>Alteraciones epigenéticas</h3>
+                <ul>
+                    <li>Metilación anormal de ADN (hipermetilación de promotores de genes supresores)</li>
+                    <li>Modificaciones de histonas</li>
+                    <li>Alteraciones en microRNAs</li>
+                </ul>
+                
+                <div class="motivation-box">
+                    <p>"Cada célula cancerosa lleva escrita en su ADN la historia de sus transformaciones. Leer esta historia nos permite anticipar su comportamiento y diseñar estrategias para detener su avance."</p>
+                </div>
+            </section>
+            
+            <!-- Sección de Cambios Estructurales y Funcionales -->
+            <section id="cambios" class="content-section hidden">
+                <h2>Cambios Estructurales y Funcionales</h2>
+                <h3>Alteraciones morfológicas</h3>
+                <ul>
+                    <li><strong>Pleomorfismo nuclear:</strong> Variación en tamaño y forma de los núcleos</li>
+                    <li><strong>Hipercromasia:</strong> Aumento de la basofilia nuclear por mayor contenido de ADN</li>
+                    <li><strong>Nucleolos prominentes:</strong> Reflejo de aumento en la síntesis proteica</li>
+                    <li><strong>Relación núcleo/citoplasma aumentada</strong></li>
+                    <li><strong>Figuras mitóticas atípicas:</strong> Mitosis aberrantes, multipolares</li>
+                </ul>
+                
+                <h3>Alteraciones funcionales</h3>
+                <ul>
+                    <li>Disfunción de puntos de control del ciclo celular</li>
+                    <li>Alteraciones en vías de señalización (Wnt/β-catenina, MAPK, PI3K/AKT)</li>
+                    <li>Metabolismo glucolítico aumentado (efecto Warburg)</li>
+                    <li>Capacidad de evasión inmune</li>
+                </ul>
+                
+                <img src="c:\Users\Jorge Monrroy\Desktop\JORGELMD\A-Desktop-JLMD\AA.JORGELMD\PATO-5-uan-MED-1\0-CEC\Diapositiva1.PNG" alt="Imagen histológica de carcinoma de células escamosas" class="histo-image">
+                <p><em>Carcinoma de células escamosas. Notar puentes intercelulares, queratinización anormal y atipia citológica marcada.</em></p>
+            </section>
+            
+            <!-- Sección de Procesos de Muerte Celular -->
+            <section id="muerte" class="content-section hidden">
+                <h2>Procesos de Muerte Celular en Oncología</h2>
+                <h3>Apoptosis</h3>
+                <p>Muerte celular programada caracterizada por:</p>
+                <ul>
+                    <li>Encogimiento celular y condensación de la cromatina</li>
+                    <li>Formación de cuerpos apoptóticos</li>
+                    <li>Fagocitosis por células vecinas sin inflamación</li>
+                </ul>
+                <p>En cáncer hay frecuente resistencia a apoptosis por alteraciones en:</p>
+                <ul>
+                    <li>Vía intrínseca (mitocondrial): Bcl-2, Bax, Bak</li>
+                    <li>Vía extrínseca (receptores de muerte): Fas, TRAIL</li>
+                    <li>Inhibidores de apoptosis (IAPs)</li>
+                </ul>
+                
+                <h3>Otras formas de muerte celular</h3>
+                <ul>
+                    <li><strong>Necrosis:</strong> Muerte accidental con liberación de contenidos celulares e inflamación</li>
+                    <li><strong>Autofagia:</strong> Puede ser pro-survival o pro-muerte según contexto</li>
+                    <li><strong>Piroptosis:</strong> Muerte inflamatoria dependiente de caspasas</li>
+                    <li><strong>Ferroptosis:</strong> Muerte dependiente de hierro y peroxidación lipídica</li>
+                </ul>
+            </section>
+            
+            <!-- Sección de Señalización y Respuestas Adaptativas -->
+            <section id="senalizacion" class="content-section hidden">
+                <h2>Señalización y Respuestas Adaptativas</h2>
+                <h3>Vías de señalización alteradas en cáncer</h3>
+                <ul>
+                    <li><strong>Vía RAS-RAF-MEK-ERK:</strong> Regula proliferación y supervivencia</li>
+                    <li><strong>Vía PI3K-AKT-mTOR:</strong> Control de crecimiento, metabolismo y supervivencia</li>
+                    <li><strong>Vía Wnt/β-catenina:</strong> Regulación de la autorenovación celular</li>
+                    <li><strong>Vía TGF-β:</strong> Dualidad como supresor tumoral en etapas tempranas y promotor en avanzadas</li>
+                    <li><strong>Vía JAK-STAT:</strong> Citocinas y factores de crecimiento</li>
+                </ul>
+                
+                <h3>Respuestas adaptativas del microambiente tumoral</h3>
+                <ul>
+                    <li>Hipoxia y activación de HIF-1α</li>
+                    <li>Reclutamiento de células del estroma (fibroblastos asociados a tumor, células inflamatorias)</li>
+                    <li>Remodelación de la matriz extracelular</li>
+                    <li>Inducción de angiogénesis (VEGF, FGF)</li>
+                    <li>Evasíón de la respuesta inmune (PD-L1, CTLA-4)</li>
+                </ul>
+                
+                <img src="c:\Users\Jorge Monrroy\Desktop\JORGELMD\A-Desktop-JLMD\AA.JORGELMD\HISTOLOGIA UnBOSQUE\INTERDISCIPLINAR-2\Diapositiva19-1.PNG" alt="Imagen histológica de glioblastoma multiforme" class="histo-image">
+                <p><em>Glioblastoma multiforme. Observar necrosis pseudopalisádica y proliferación vascular endotelial.</em></p>
+            </section>
+            
+            <!-- Sección de Herramientas de IA -->
+            <section id="ia-tools" class="content-section hidden">
+                <h2>Herramientas de Inteligencia Artificial para Patología Oncológica</h2>
+                
+                <div class="ai-section">
+                    <h3 class="glowing-text">IA para Investigación y Diagnóstico</h3>
+                    <div class="ai-category">
+                        <h4>Análisis de Imágenes Histológicas</h4>
+                        <a href="https://www.pathai.com/" class="ai-link">PathAI</a>
+                        <a href="https://www.deepmind.com/health" class="ai-link">DeepMind Health</a>
+                        <a href="https://www.indicalab.com/" class="ai-link">Indica Labs</a>
+                        <a href="https://www.ibm.com/watson-health" class="ai-link">IBM Watson Health</a>
+                    </div>
+                    
+                    <div class="ai-category">
+                        <h4>Genómica y Medicina de Precisión</h4>
+                        <a href="https://www.tempus.com/" class="ai-link">Tempus</a>
+                        <a href="https://www.foundationmedicine.com/" class="ai-link">Foundation Medicine</a>
+                        <a href="https://www.flatiron.com/" class="ai-link">Flatiron Health</a>
+                    </div>
+                </div>
+                
+                <div class="ai-section">
+                    <h3 class="glowing-text">IA para Generación de Contenido</h3>
+                    <div class="ai-category">
+                        <h4>Generación de Textos Científicos</h4>
+                        <a href="https://openai.com/" class="ai-link">ChatGPT (OpenAI)</a>
+                        <a href="https://www.anthropic.com/" class="ai-link">Claude (Anthropic)</a>
+                        <a href="https://www.scite.ai/" class="ai-link">scite.ai</a>
+                        <a href="https://www.consensus.app/" class="ai-link">Consensus</a>
+                    </div>
+                    
+                    <div class="ai-category">
+                        <h4>Generación de Imágenes Médicas</h4>
+                        <a href="https://openai.com/dall-e-3" class="ai-link">DALL-E 3</a>
+                        <a href="https://www.midjourney.com/" class="ai-link">Midjourney</a>
+                        <a href="https://www.nvidia.com/en-us/healthcare/" class="ai-link">NVIDIA CLARA</a>
+                    </div>
+                    
+                    <div class="ai-category">
+                        <h4>Generación de Videos Educativos</h4>
+                        <a href="https://www.synthesia.io/" class="ai-link">Synthesia</a>
+                        <a href="https://www.pictory.ai/" class="ai-link">Pictory</a>
+                        <a href="https://www.invideo.io/" class="ai-link">InVideo</a>
+                    </div>
+                    
+                    <div class="ai-category">
+                        <h4>Generación y Análisis de Código</h4>
+                        <a href="https://github.com/features/copilot" class="ai-link">GitHub Copilot</a>
+                        <a href="https://www.deepcode.ai/" class="ai-link">DeepCode</a>
+                        <a href="https://www.tabnine.com/" class="ai-link">Tabnine</a>
+                    </div>
+                </div>
+                
+                <div class="ai-section">
+                    <h3 class="glowing-text">IA para Educación Médica</h3>
+                    <a href="https://www.osmosis.org/" class="ai-link">Osmosis</a>
+                    <a href="https://www.amboss.com/" class="ai-link">AMBOSS</a>
+                    <a href="https://www.lecturio.com/" class="ai-link">Lecturio</a>
+                    <a href="https://www.picmonic.com/" class="ai-link">Picmonic</a>
+                </div>
+                
+                <div class="motivation-box">
+                    <p>"La inteligencia artificial no viene a reemplazar al patólogo, sino a potenciar su capacidad de análisis, permitiéndole enfocarse en lo que realmente importa: la interpretación clínica y la toma de decisiones para el beneficio del paciente."</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <p>© 2025 Universidad Antonio Nariño - Facultad de Medicina</p>
+        <p>Patología Oncológica - Todos los derechos reservados</p>
+    </footer>
+    
+    <script>
+        // Función para mostrar/ocultar el menú lateral
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('sidebar-collapsed');
+        });
+        
+        // Función para mostrar secciones específicas
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Desplazarse a la parte superior del contenido
+            document.getElementById('mainContent').scrollTo(0, 0);
+        }
+        
+        // Mostrar solo la introducción al cargar la página
+        window.onload = function() {
+            showSection('introduccion');
+        };
+    </script>
+</body>
+</html>
